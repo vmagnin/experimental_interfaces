@@ -1,0 +1,31 @@
+(base) [osboxes@localhost cfwrapper]$ ./cfwrapper.py -l /usr/include/libadwaita-1 -m libadwaita
+ Pass 1: looking for enumerators, funptr and derived types...
+ Pass 2: looking for C functions... 
+/usr/include/libadwaita-1        =>  libadwaita-auto.f90     206049 bytes
+
+Extracting GDK events for gtk-0-fortran
+Failed to open /usr/include/gtk-0.0/gdk/gdktypes.h:No such file or directory
+
+=== Statistics (ready to paste in the Status wiki page) ===
+
+## gtk-fortran 0.0.0, GTK not_GTK, GLib 2.76.3, Fedora 38 x86_64, Python 3.11.3
+osboxes, Tue, 27 Jun 2023 14:11:43 +0000
+* nb_files scanned =            58
+* nb_generated_interfaces =    694
+* nb_deprecated_functions =      4
+* nb_type_errors =              16
+* nb_errors (others) =          12
+* nb_lines treated =          1852
+* nb_variadic functions =        8
+* nb_enumerators =              14
+* nb_win32_utf8 =                0
+* Number of types =             65
+* Number of funptr types =       1
+* Computing time: 0.54 s
+* SHA1:  f476f3abc3fdca916253102fa2d844d76ac4544b
+ >>>>>> SHA 1 HAS BEEN MODIFIED ! It was  afa9b10198e885644515a475225873c599902e5a  <<<<<< 
+
+
+ Used types: ['c_ptr', 'c_char', '?', 'c_int', 'c_funptr', 'c_float', 'c_double', 'c_size_t'] 
+(base) [osboxes@localhost cfwrapper]$ 
+

@@ -1,0 +1,23 @@
+name = "experimental_interfaces"
+description = "Experimental interfaces automatically generated for various C libraries"
+version = "0.1.0"
+license = "MIT"
+author = "vmagnin"
+maintainer = "https://github.com/vmagnin/experimental_interfaces/issues"
+copyright = "Copyright 2023, vmagnin"
+homepage = "https://github.com/vmagnin/experimental_interfaces"
+keywords = ["Fortran", "C", "interfaces"]
+
+[build]
+auto-executables = true
+auto-tests = true
+auto-examples = true
+module-naming = false
+
+[install]
+library = false
+
+[fortran]
+implicit-typing = false
+implicit-external = false
+source-form = "free"

@@ -1,0 +1,10 @@
+C type
+SoupAuthDomainBasicAuthCallback
+SoupAuthDomainDigestAuthCallback
+SoupAuthDomainFilter
+SoupAuthDomainGenericAuthCallback
+SoupLoggerFilter
+SoupLoggerPrinter
+SoupMessageHeadersForeachFunc
+SoupServerCallback
+SoupServerWebsocketCallback

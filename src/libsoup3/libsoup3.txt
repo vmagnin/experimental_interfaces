@@ -1,0 +1,30 @@
+(base) [osboxes@localhost cfwrapper]$ ./cfwrapper.py -l /usr/include/libsoup-3.0 -m libsoup3
+ Pass 1: looking for enumerators, funptr and derived types...
+ Pass 2: looking for C functions... 
+/usr/include/libsoup-3.0         =>  libsoup3-auto.f90       125999 bytes
+
+Extracting GDK events for gtk-0-fortran
+Failed to open /usr/include/gtk-0.0/gdk/gdktypes.h:No such file or directory
+
+=== Statistics (ready to paste in the Status wiki page) ===
+
+## gtk-fortran 0.0.0, GTK not_GTK, GLib 2.76.3, Fedora 38 x86_64, Python 3.11.3
+osboxes, Tue, 27 Jun 2023 14:09:44 +0000
+* nb_files scanned =            42
+* nb_generated_interfaces =    375
+* nb_deprecated_functions =      2
+* nb_type_errors =              50
+* nb_errors (others) =          32
+* nb_lines treated =          1290
+* nb_variadic functions =        6
+* nb_enumerators =              23
+* nb_win32_utf8 =                0
+* Number of types =             65
+* Number of funptr types =       9
+* Computing time: 0.35 s
+* SHA1:  afa9b10198e885644515a475225873c599902e5a
+ >>>>>> SHA 1 HAS BEEN MODIFIED ! It was  2b1c8428cceb9cb4203da8f0ef5495c946e10905  <<<<<< 
+
+
+ Used types: ['c_ptr', 'c_char', 'c_int', '?', 'c_funptr', 'c_size_t', 'c_int64_t', 'c_long'] 
+
