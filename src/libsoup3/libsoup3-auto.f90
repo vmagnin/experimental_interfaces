@@ -326,6 +326,47 @@ function soup_server_accept_iostream(server, stream, local_addr, remote_addr,&
 end function
 
 ! SOUP_AVAILABLE_IN_ALL
+!void soup_server_add_handler (SoupServer *server, const char *path, SoupServerCallback callback, gpointer user_data, GDestroyNotify destroy);
+subroutine soup_server_add_handler(server, path, callback, user_data, destroy)&
+& bind(c)
+  import :: c_ptr, c_char, c_funptr
+  implicit none
+  type(c_ptr), value :: server
+  character(kind=c_char), dimension(*) :: path
+  type(c_funptr), value :: callback
+  type(c_ptr), value :: user_data
+  type(c_funptr), value :: destroy
+end subroutine
+
+! SOUP_AVAILABLE_IN_ALL
+!void soup_server_add_early_handler (SoupServer *server, const char *path, SoupServerCallback callback, gpointer user_data, GDestroyNotify destroy);
+subroutine soup_server_add_early_handler(server, path, callback, user_data,&
+& destroy) bind(c)
+  import :: c_ptr, c_char, c_funptr
+  implicit none
+  type(c_ptr), value :: server
+  character(kind=c_char), dimension(*) :: path
+  type(c_funptr), value :: callback
+  type(c_ptr), value :: user_data
+  type(c_funptr), value :: destroy
+end subroutine
+
+! SOUP_AVAILABLE_IN_ALL
+!void soup_server_add_websocket_handler (SoupServer *server, const char *path, const char *origin, char **protocols, SoupServerWebsocketCallback callback, gpointer user_data, GDestroyNotify destroy);
+subroutine soup_server_add_websocket_handler(server, path, origin, protocols,&
+& callback, user_data, destroy) bind(c)
+  import :: c_ptr, c_char, c_funptr
+  implicit none
+  type(c_ptr), value :: server
+  character(kind=c_char), dimension(*) :: path
+  character(kind=c_char), dimension(*) :: origin
+  type(c_ptr), dimension(*) :: protocols
+  type(c_funptr), value :: callback
+  type(c_ptr), value :: user_data
+  type(c_funptr), value :: destroy
+end subroutine
+
+! SOUP_AVAILABLE_IN_ALL
 !void soup_server_add_websocket_extension (SoupServer *server, GType extension_type);
 subroutine soup_server_add_websocket_extension(server, extension_type) bind(c)
   import :: c_ptr, c_size_t
@@ -392,6 +433,18 @@ end subroutine
 !--------------------------------------------------
 ! /usr/include/libsoup-3.0/libsoup/soup-auth-domain-digest.h
 !--------------------------------------------------
+! SOUP_AVAILABLE_IN_ALL
+!void soup_auth_domain_digest_set_auth_callback (SoupAuthDomain *domain, SoupAuthDomainDigestAuthCallback callback, gpointer user_data, GDestroyNotify dnotify);
+subroutine soup_auth_domain_digest_set_auth_callback(domain, callback,&
+& user_data, dnotify) bind(c)
+  import :: c_ptr, c_funptr
+  implicit none
+  type(c_ptr), value :: domain
+  type(c_funptr), value :: callback
+  type(c_ptr), value :: user_data
+  type(c_funptr), value :: dnotify
+end subroutine
+
 ! SOUP_AVAILABLE_IN_ALL
 !char *soup_auth_domain_digest_encode_password (const char *username, const char *realm, const char *password);
 function soup_auth_domain_digest_encode_password(username, realm, password)&
@@ -2035,6 +2088,18 @@ end function
 !--------------------------------------------------
 ! /usr/include/libsoup-3.0/libsoup/soup-auth-domain-basic.h
 !--------------------------------------------------
+! SOUP_AVAILABLE_IN_ALL
+!void soup_auth_domain_basic_set_auth_callback (SoupAuthDomain *domain, SoupAuthDomainBasicAuthCallback callback, gpointer user_data, GDestroyNotify dnotify);
+subroutine soup_auth_domain_basic_set_auth_callback(domain, callback,&
+& user_data, dnotify) bind(c)
+  import :: c_ptr, c_funptr
+  implicit none
+  type(c_ptr), value :: domain
+  type(c_funptr), value :: callback
+  type(c_ptr), value :: user_data
+  type(c_funptr), value :: dnotify
+end subroutine
+
 !--------------------------------------------------
 ! /usr/include/libsoup-3.0/libsoup/soup-multipart-input-stream.h
 !--------------------------------------------------
@@ -2059,6 +2124,19 @@ function soup_multipart_input_stream_next_part(multipart, cancellable, error)&
   type(c_ptr), value :: cancellable
   type(c_ptr), value :: error
 end function
+
+! SOUP_AVAILABLE_IN_ALL
+!void soup_multipart_input_stream_next_part_async (SoupMultipartInputStream *multipart, int io_priority, GCancellable *cancellable, GAsyncReadyCallback callback, gpointer data);
+subroutine soup_multipart_input_stream_next_part_async(multipart, io_priority,&
+& cancellable, callback, data) bind(c)
+  import :: c_ptr, c_int, c_funptr
+  implicit none
+  type(c_ptr), value :: multipart
+  integer(c_int), value :: io_priority
+  type(c_ptr), value :: cancellable
+  type(c_funptr), value :: callback
+  type(c_ptr), value :: data
+end subroutine
 
 ! SOUP_AVAILABLE_IN_ALL
 !GInputStream *soup_multipart_input_stream_next_part_finish (SoupMultipartInputStream *multipart, GAsyncResult *result, GError **error);
@@ -2426,6 +2504,18 @@ subroutine soup_auth_domain_remove_path(domain, path) bind(c)
 end subroutine
 
 ! SOUP_AVAILABLE_IN_ALL
+!void soup_auth_domain_set_filter (SoupAuthDomain *domain, SoupAuthDomainFilter filter, gpointer filter_data, GDestroyNotify dnotify);
+subroutine soup_auth_domain_set_filter(domain, filter, filter_data, dnotify)&
+& bind(c)
+  import :: c_ptr, c_funptr
+  implicit none
+  type(c_ptr), value :: domain
+  type(c_funptr), value :: filter
+  type(c_ptr), value :: filter_data
+  type(c_funptr), value :: dnotify
+end subroutine
+
+! SOUP_AVAILABLE_IN_ALL
 !const char *soup_auth_domain_get_realm (SoupAuthDomain *domain);
 function soup_auth_domain_get_realm(domain) bind(c)
   import :: c_ptr
@@ -2433,6 +2523,18 @@ function soup_auth_domain_get_realm(domain) bind(c)
   type(c_ptr) :: soup_auth_domain_get_realm
   type(c_ptr), value :: domain
 end function
+
+! SOUP_AVAILABLE_IN_ALL
+!void soup_auth_domain_set_generic_auth_callback (SoupAuthDomain *domain, SoupAuthDomainGenericAuthCallback auth_callback, gpointer auth_data, GDestroyNotify dnotify);
+subroutine soup_auth_domain_set_generic_auth_callback(domain, auth_callback,&
+& auth_data, dnotify) bind(c)
+  import :: c_ptr, c_funptr
+  implicit none
+  type(c_ptr), value :: domain
+  type(c_funptr), value :: auth_callback
+  type(c_ptr), value :: auth_data
+  type(c_funptr), value :: dnotify
+end subroutine
 
 ! SOUP_AVAILABLE_IN_ALL
 !gboolean soup_auth_domain_check_password (SoupAuthDomain *domain, SoupServerMessage *msg, const char *username, const char *password);
@@ -2685,6 +2787,20 @@ subroutine soup_session_abort(session) bind(c)
 end subroutine
 
 ! SOUP_AVAILABLE_IN_ALL
+!void soup_session_send_async (SoupSession *session, SoupMessage *msg, int io_priority, GCancellable *cancellable, GAsyncReadyCallback callback, gpointer user_data);
+subroutine soup_session_send_async(session, msg, io_priority, cancellable,&
+& callback, user_data) bind(c)
+  import :: c_ptr, c_int, c_funptr
+  implicit none
+  type(c_ptr), value :: session
+  type(c_ptr), value :: msg
+  integer(c_int), value :: io_priority
+  type(c_ptr), value :: cancellable
+  type(c_funptr), value :: callback
+  type(c_ptr), value :: user_data
+end subroutine
+
+! SOUP_AVAILABLE_IN_ALL
 !GInputStream *soup_session_send_finish (SoupSession *session, GAsyncResult *result, GError **error);
 function soup_session_send_finish(session, result, error) bind(c)
   import :: c_ptr
@@ -2706,6 +2822,20 @@ function soup_session_send(session, msg, cancellable, error) bind(c)
   type(c_ptr), value :: cancellable
   type(c_ptr), value :: error
 end function
+
+! SOUP_AVAILABLE_IN_ALL
+!void soup_session_send_and_read_async (SoupSession *session, SoupMessage *msg, int io_priority, GCancellable *cancellable, GAsyncReadyCallback callback, gpointer user_data);
+subroutine soup_session_send_and_read_async(session, msg, io_priority,&
+& cancellable, callback, user_data) bind(c)
+  import :: c_ptr, c_int, c_funptr
+  implicit none
+  type(c_ptr), value :: session
+  type(c_ptr), value :: msg
+  integer(c_int), value :: io_priority
+  type(c_ptr), value :: cancellable
+  type(c_funptr), value :: callback
+  type(c_ptr), value :: user_data
+end subroutine
 
 ! SOUP_AVAILABLE_IN_ALL
 !GBytes *soup_session_send_and_read_finish (SoupSession *session, GAsyncResult *result, GError **error);
@@ -2820,6 +2950,22 @@ function soup_session_get_feature_for_message(session, feature_type, msg)&
 end function
 
 ! SOUP_AVAILABLE_IN_ALL
+!void soup_session_websocket_connect_async (SoupSession *session, SoupMessage *msg, const char *origin, char **protocols, int io_priority, GCancellable *cancellable, GAsyncReadyCallback callback, gpointer user_data);
+subroutine soup_session_websocket_connect_async(session, msg, origin,&
+& protocols, io_priority, cancellable, callback, user_data) bind(c)
+  import :: c_ptr, c_char, c_int, c_funptr
+  implicit none
+  type(c_ptr), value :: session
+  type(c_ptr), value :: msg
+  character(kind=c_char), dimension(*) :: origin
+  type(c_ptr), dimension(*) :: protocols
+  integer(c_int), value :: io_priority
+  type(c_ptr), value :: cancellable
+  type(c_funptr), value :: callback
+  type(c_ptr), value :: user_data
+end subroutine
+
+! SOUP_AVAILABLE_IN_ALL
 !SoupWebsocketConnection *soup_session_websocket_connect_finish (SoupSession *session, GAsyncResult *result, GError **error);
 function soup_session_websocket_connect_finish(session, result, error) bind(c)
   import :: c_ptr
@@ -2829,6 +2975,20 @@ function soup_session_websocket_connect_finish(session, result, error) bind(c)
   type(c_ptr), value :: result
   type(c_ptr), value :: error
 end function
+
+! SOUP_AVAILABLE_IN_ALL
+!void soup_session_preconnect_async (SoupSession *session, SoupMessage *msg, int io_priority, GCancellable *cancellable, GAsyncReadyCallback callback, gpointer user_data);
+subroutine soup_session_preconnect_async(session, msg, io_priority,&
+& cancellable, callback, user_data) bind(c)
+  import :: c_ptr, c_int, c_funptr
+  implicit none
+  type(c_ptr), value :: session
+  type(c_ptr), value :: msg
+  integer(c_int), value :: io_priority
+  type(c_ptr), value :: cancellable
+  type(c_funptr), value :: callback
+  type(c_ptr), value :: user_data
+end subroutine
 
 ! SOUP_AVAILABLE_IN_ALL
 !gboolean soup_session_preconnect_finish (SoupSession *session, GAsyncResult *result, GError **error);
@@ -3394,6 +3554,42 @@ function soup_logger_new(level) bind(c)
   type(c_ptr) :: soup_logger_new
   integer(c_int), value :: level
 end function
+
+! SOUP_AVAILABLE_IN_ALL
+!void soup_logger_set_request_filter (SoupLogger *logger, SoupLoggerFilter request_filter, gpointer filter_data, GDestroyNotify destroy);
+subroutine soup_logger_set_request_filter(logger, request_filter, filter_data,&
+& destroy) bind(c)
+  import :: c_ptr, c_funptr
+  implicit none
+  type(c_ptr), value :: logger
+  type(c_funptr), value :: request_filter
+  type(c_ptr), value :: filter_data
+  type(c_funptr), value :: destroy
+end subroutine
+
+! SOUP_AVAILABLE_IN_ALL
+!void soup_logger_set_response_filter (SoupLogger *logger, SoupLoggerFilter response_filter, gpointer filter_data, GDestroyNotify destroy);
+subroutine soup_logger_set_response_filter(logger, response_filter,&
+& filter_data, destroy) bind(c)
+  import :: c_ptr, c_funptr
+  implicit none
+  type(c_ptr), value :: logger
+  type(c_funptr), value :: response_filter
+  type(c_ptr), value :: filter_data
+  type(c_funptr), value :: destroy
+end subroutine
+
+! SOUP_AVAILABLE_IN_ALL
+!void soup_logger_set_printer (SoupLogger *logger, SoupLoggerPrinter printer, gpointer printer_data, GDestroyNotify destroy);
+subroutine soup_logger_set_printer(logger, printer, printer_data, destroy)&
+& bind(c)
+  import :: c_ptr, c_funptr
+  implicit none
+  type(c_ptr), value :: logger
+  type(c_funptr), value :: printer
+  type(c_ptr), value :: printer_data
+  type(c_funptr), value :: destroy
+end subroutine
 
 ! SOUP_AVAILABLE_IN_ALL
 !void soup_logger_set_max_body_size (SoupLogger *logger, int max_body_size);

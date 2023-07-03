@@ -1,4 +1,6 @@
 C type
+GAsyncReadyCallback
+GDestroyNotify
 SoupAuthDomainBasicAuthCallback
 SoupAuthDomainDigestAuthCallback
 SoupAuthDomainFilter
