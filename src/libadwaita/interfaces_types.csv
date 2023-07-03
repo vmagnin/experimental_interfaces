@@ -60,6 +60,13 @@ Time;integer(c_long);c_long
 KeyCode;character(kind=c_char);c_char
 KeySym;integer(c_long);c_long
 GWin32OSType;integer(c_int);c_int
+GtkLicense;integer(c_int);c_int
+GApplicationFlags;integer(c_int);c_int
+GtkInputHints;integer(c_int);c_int
+GtkInputPurpose;integer(c_int);c_int
+GtkPackType;integer(c_int);c_int
+GtkArrowType;integer(c_int);c_int
+GdkDragAction;integer(c_int);c_int
 long double;real(c_long_double);c_long_double
 unsigned long;integer(c_long);c_long
 unsigned short;integer(c_short);c_short

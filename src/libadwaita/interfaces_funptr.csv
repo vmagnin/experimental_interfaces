@@ -1,2 +1,4 @@
 C type
 AdwAnimationTargetFunc
+GAsyncReadyCallback
+GDestroyNotify

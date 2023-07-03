@@ -380,6 +380,24 @@ subroutine adw_about_window_set_copyright(self, copyright) bind(c)
 end subroutine
 
 ! ADW_AVAILABLE_IN_1_2
+!GtkLicense adw_about_window_get_license_type (AdwAboutWindow *self);
+function adw_about_window_get_license_type(self) bind(c)
+  import :: c_int, c_ptr
+  implicit none
+  integer(c_int) :: adw_about_window_get_license_type
+  type(c_ptr), value :: self
+end function
+
+! ADW_AVAILABLE_IN_1_2
+!void adw_about_window_set_license_type (AdwAboutWindow *self, GtkLicense license_type);
+subroutine adw_about_window_set_license_type(self, license_type) bind(c)
+  import :: c_ptr, c_int
+  implicit none
+  type(c_ptr), value :: self
+  integer(c_int), value :: license_type
+end subroutine
+
+! ADW_AVAILABLE_IN_1_2
 !const char *adw_about_window_get_license (AdwAboutWindow *self);
 function adw_about_window_get_license(self) bind(c)
   import :: c_ptr
@@ -394,6 +412,19 @@ subroutine adw_about_window_set_license(self, license) bind(c)
   import :: c_ptr, c_char
   implicit none
   type(c_ptr), value :: self
+  character(kind=c_char), dimension(*) :: license
+end subroutine
+
+! ADW_AVAILABLE_IN_1_2
+!void adw_about_window_add_legal_section (AdwAboutWindow *self, const char *title, const char *copyright, GtkLicense license_type, const char *license);
+subroutine adw_about_window_add_legal_section(self, title, copyright,&
+& license_type, license) bind(c)
+  import :: c_ptr, c_char, c_int
+  implicit none
+  type(c_ptr), value :: self
+  character(kind=c_char), dimension(*) :: title
+  character(kind=c_char), dimension(*) :: copyright
+  integer(c_int), value :: license_type
   character(kind=c_char), dimension(*) :: license
 end subroutine
 
@@ -549,6 +580,18 @@ end subroutine
 !--------------------------------------------------
 ! /usr/include/libadwaita-1/adw-animation-target.h
 !--------------------------------------------------
+! ADW_AVAILABLE_IN_ALL
+!AdwAnimationTarget *adw_callback_animation_target_new (AdwAnimationTargetFunc callback, gpointer user_data, GDestroyNotify destroy) ;
+function adw_callback_animation_target_new(callback, user_data, destroy)&
+& bind(c)
+  import :: c_ptr, c_funptr
+  implicit none
+  type(c_ptr) :: adw_callback_animation_target_new
+  type(c_funptr), value :: callback
+  type(c_ptr), value :: user_data
+  type(c_funptr), value :: destroy
+end function
+
 ! ADW_AVAILABLE_IN_1_2
 !AdwAnimationTarget *adw_property_animation_target_new (GObject *object, const char *property_name) ;
 function adw_property_animation_target_new(object, property_name) bind(c)
@@ -1619,6 +1662,24 @@ subroutine adw_flap_set_separator(self, separator) bind(c)
 end subroutine
 
 ! ADW_AVAILABLE_IN_ALL
+!GtkPackType adw_flap_get_flap_position (AdwFlap *self);
+function adw_flap_get_flap_position(self) bind(c)
+  import :: c_int, c_ptr
+  implicit none
+  integer(c_int) :: adw_flap_get_flap_position
+  type(c_ptr), value :: self
+end function
+
+! ADW_AVAILABLE_IN_ALL
+!void adw_flap_set_flap_position (AdwFlap *self, GtkPackType position);
+subroutine adw_flap_set_flap_position(self, position) bind(c)
+  import :: c_ptr, c_int
+  implicit none
+  type(c_ptr), value :: self
+  integer(c_int), value :: position
+end subroutine
+
+! ADW_AVAILABLE_IN_ALL
 !gboolean adw_flap_get_reveal_flap (AdwFlap *self);
 function adw_flap_get_reveal_flap(self) bind(c)
   import :: c_int, c_ptr
@@ -2112,6 +2173,18 @@ subroutine adw_tab_overview_set_show_end_title_buttons(self,&
   implicit none
   type(c_ptr), value :: self
   integer(c_int), value :: show_end_title_buttons
+end subroutine
+
+! ADW_AVAILABLE_IN_1_3
+!void adw_tab_overview_setup_extra_drop_target (AdwTabOverview *self, GdkDragAction actions, GType *types, gsize n_types);
+subroutine adw_tab_overview_setup_extra_drop_target(self, actions, types,&
+& n_types) bind(c)
+  import :: c_ptr, c_int, c_size_t
+  implicit none
+  type(c_ptr), value :: self
+  integer(c_int), value :: actions
+  type(c_ptr), value :: types
+  integer(c_size_t), value :: n_types
 end subroutine
 
 ! ADW_AVAILABLE_IN_1_3
@@ -4087,6 +4160,18 @@ subroutine adw_tab_bar_set_inverted(self, inverted) bind(c)
   integer(c_int), value :: inverted
 end subroutine
 
+! ADW_AVAILABLE_IN_ALL
+!void adw_tab_bar_setup_extra_drop_target (AdwTabBar *self, GdkDragAction actions, GType *types, gsize n_types);
+subroutine adw_tab_bar_setup_extra_drop_target(self, actions, types, n_types)&
+& bind(c)
+  import :: c_ptr, c_int, c_size_t
+  implicit none
+  type(c_ptr), value :: self
+  integer(c_int), value :: actions
+  type(c_ptr), value :: types
+  integer(c_size_t), value :: n_types
+end subroutine
+
 ! ADW_AVAILABLE_IN_1_3
 !gboolean adw_tab_bar_get_extra_drag_preload (AdwTabBar *self);
 function adw_tab_bar_get_extra_drag_preload(self) bind(c)
@@ -4831,6 +4916,18 @@ function adw_message_dialog_has_response(self, response) bind(c)
 end function
 
 ! ADW_AVAILABLE_IN_1_3
+!void adw_message_dialog_choose (AdwMessageDialog *self, GCancellable *cancellable, GAsyncReadyCallback callback, gpointer user_data);
+subroutine adw_message_dialog_choose(self, cancellable, callback, user_data)&
+& bind(c)
+  import :: c_ptr, c_funptr
+  implicit none
+  type(c_ptr), value :: self
+  type(c_ptr), value :: cancellable
+  type(c_funptr), value :: callback
+  type(c_ptr), value :: user_data
+end subroutine
+
+! ADW_AVAILABLE_IN_1_3
 !const char *adw_message_dialog_choose_finish (AdwMessageDialog *self, GAsyncResult *result);
 function adw_message_dialog_choose_finish(self, result) bind(c)
   import :: c_ptr
@@ -5402,6 +5499,24 @@ subroutine adw_split_button_set_popover(self, popover) bind(c)
   type(c_ptr), value :: popover
 end subroutine
 
+! ADW_AVAILABLE_IN_ALL
+!GtkArrowType adw_split_button_get_direction (AdwSplitButton *self);
+function adw_split_button_get_direction(self) bind(c)
+  import :: c_int, c_ptr
+  implicit none
+  integer(c_int) :: adw_split_button_get_direction
+  type(c_ptr), value :: self
+end function
+
+! ADW_AVAILABLE_IN_ALL
+!void adw_split_button_set_direction (AdwSplitButton *self, GtkArrowType direction);
+subroutine adw_split_button_set_direction(self, direction) bind(c)
+  import :: c_ptr, c_int
+  implicit none
+  type(c_ptr), value :: self
+  integer(c_int), value :: direction
+end subroutine
+
 ! ADW_AVAILABLE_IN_1_2
 !const char *adw_split_button_get_dropdown_tooltip (AdwSplitButton *self);
 function adw_split_button_get_dropdown_tooltip(self) bind(c)
@@ -5822,6 +5937,42 @@ subroutine adw_entry_row_set_show_apply_button(self, show_apply_button) bind(c)
 end subroutine
 
 ! ADW_AVAILABLE_IN_1_2
+!GtkInputHints adw_entry_row_get_input_hints (AdwEntryRow *self);
+function adw_entry_row_get_input_hints(self) bind(c)
+  import :: c_int, c_ptr
+  implicit none
+  integer(c_int) :: adw_entry_row_get_input_hints
+  type(c_ptr), value :: self
+end function
+
+! ADW_AVAILABLE_IN_1_2
+!void adw_entry_row_set_input_hints (AdwEntryRow *self, GtkInputHints hints);
+subroutine adw_entry_row_set_input_hints(self, hints) bind(c)
+  import :: c_ptr, c_int
+  implicit none
+  type(c_ptr), value :: self
+  integer(c_int), value :: hints
+end subroutine
+
+! ADW_AVAILABLE_IN_1_2
+!GtkInputPurpose adw_entry_row_get_input_purpose (AdwEntryRow *self);
+function adw_entry_row_get_input_purpose(self) bind(c)
+  import :: c_int, c_ptr
+  implicit none
+  integer(c_int) :: adw_entry_row_get_input_purpose
+  type(c_ptr), value :: self
+end function
+
+! ADW_AVAILABLE_IN_1_2
+!void adw_entry_row_set_input_purpose (AdwEntryRow *self, GtkInputPurpose purpose);
+subroutine adw_entry_row_set_input_purpose(self, purpose) bind(c)
+  import :: c_ptr, c_int
+  implicit none
+  type(c_ptr), value :: self
+  integer(c_int), value :: purpose
+end subroutine
+
+! ADW_AVAILABLE_IN_1_2
 !gboolean adw_entry_row_get_enable_emoji_completion (AdwEntryRow *self);
 function adw_entry_row_get_enable_emoji_completion(self) bind(c)
   import :: c_int, c_ptr
@@ -5984,6 +6135,16 @@ end function
 !--------------------------------------------------
 ! /usr/include/libadwaita-1/adw-application.h
 !--------------------------------------------------
+! ADW_AVAILABLE_IN_ALL
+!AdwApplication *adw_application_new (const char *application_id, GApplicationFlags flags) ;
+function adw_application_new(application_id, flags) bind(c)
+  import :: c_ptr, c_char, c_int
+  implicit none
+  type(c_ptr) :: adw_application_new
+  character(kind=c_char), dimension(*) :: application_id
+  integer(c_int), value :: flags
+end function
+
 ! ADW_AVAILABLE_IN_ALL
 !AdwStyleManager *adw_application_get_style_manager (AdwApplication *self);
 function adw_application_get_style_manager(self) bind(c)
